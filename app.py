@@ -6,7 +6,13 @@ import numpy as np
 from surprise import Dataset, Reader
 from surprise import SVD
 import plotly.express as px
+import os
 import plotly.graph_objects as go
+
+# Create the app
+app = dash.Dash(__name__, suppress_callback_exceptions=True)
+server = app.server  # Important for deployment
+
 
 # Load data
 ratings = pd.read_csv("Data/ratings.csv")
@@ -529,4 +535,10 @@ def update_top_movies(tab):
     )
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8050)
+    # Hugging Face Spaces runs on port 7860
+    port = int(os.environ.get("PORT", 7860))
+    app.run_server(
+        debug=False,
+        host='0.0.0.0',
+        port=port
+    )

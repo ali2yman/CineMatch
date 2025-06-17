@@ -7,3 +7,4 @@ scikit-learn==1.7.0
 torch==2.7.1
 dash==3.0.4
 requests==2.32.4
+gunicorn==21.2.0
